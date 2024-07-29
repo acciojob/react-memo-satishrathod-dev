@@ -1,13 +1,16 @@
 import React, { useMemo, useState } from "react";
 
 const UseMemo = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState("+");
   const [todos, setTodos] = useState([]);
-  const calculation = useMemo(() => expensiveCalculation(count), [count]);
+  const calculation = useMemo(
+    () => expensiveCalculation(parseInt(count, 10)),
+    [count]
+  );
 
   const increment = () => {
-    // setCount((c) => (c === "+" ? 1 : c + 1));
-    setCount((c) => c + 1);
+    setCount((c) => (c === "+" ? 1 : parseInt(c, 10) + 1));
+    // setCount((c) => c + 1);
   };
 
   const addTodo = () => {
