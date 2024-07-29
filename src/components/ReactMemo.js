@@ -2,7 +2,7 @@ import React, { useState, memo } from "react";
 
 const SkillItem = memo(({ skill }) => {
   console.log("Rendering skill:", skill);
-  return <li>{skill}</li>;
+  return <li id="item-jumbotron">{skill}</li>;
 });
 
 const ReactMemo = () => {
