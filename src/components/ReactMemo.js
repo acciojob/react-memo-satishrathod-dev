@@ -21,11 +21,16 @@ const ReactMemo = () => {
   };
 
   return (
-    <div>
+    <div id="main">
       <hr />
       <hr />
       <h1>React.memo</h1>
-      <input type="text" value={input} onChange={handleInputValue} />
+      <input
+        id="skill-input"
+        type="text"
+        value={input}
+        onChange={handleInputValue}
+      />
       <button onClick={handleAddSkill}>Add Skill</button>
       <ul>
         {skills.map((skill, index) => (
