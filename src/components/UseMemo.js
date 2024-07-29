@@ -19,7 +19,11 @@ const UseMemo = () => {
       <h1>My todos</h1>
       <div>
         {todos.map((todo, index) => {
-          return <p key={index}>{todo}</p>;
+          return (
+            <p id={`todo-${index}`} key={index}>
+              {todo}
+            </p>
+          );
         })}
         <button id="add-todo-btn" onClick={addTodo}>
           Add Todo

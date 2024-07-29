@@ -31,7 +31,9 @@ const ReactMemo = () => {
         value={input}
         onChange={handleInputValue}
       />
-      <button onClick={handleAddSkill}>Add Skill</button>
+      <button id="skill-btn" onClick={handleAddSkill}>
+        Add Skill
+      </button>
       <ul>
         {skills.map((skill, index) => (
           <SkillItem key={index} skill={skill} />
