@@ -20,6 +20,8 @@ const ReactMemo = () => {
     }
   };
 
+  //JSX
+
   return (
     <div id="main">
       <hr />
