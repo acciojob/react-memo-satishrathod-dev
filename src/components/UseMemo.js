@@ -1,57 +1,35 @@
 import React, { useMemo, useState } from "react";
 
-const UseMemo = () => {
+function UseMemo() {
+  console.log("UseMemo rendered");
   const [count, setCount] = useState(0);
-  const [todos, setTodos] = useState([]);
-  const calculation = useMemo(
-    () => expensiveCalculation(parseInt(count, 10)),
-    [count]
-  );
 
-  const increment = () => {
-    // setCount((c) => (c === "+" ? 1 : parseInt(c, 10) + 1));
-    setCount((c) => c + 1);
+  const expensiveFunction = () => {
+    console.log("Expensive Function Called");
+    let sum = 0;
+    for (let i = 0; i < 1000000000; i++) {
+      sum++;
+    }
+    return sum;
   };
 
-  const addTodo = () => {
-    setTodos((t) => [...t, "New Todo"]);
-  };
+  const expensiveCalculation = useMemo(() => {
+    return expensiveFunction() + count;
+  }, [count]);
 
   return (
-    <div id="main">
-      <h1>React.useMemo</h1>
-      <h1>My todos</h1>
-      <div>
-        {todos.map((todo, index) => {
-          return (
-            <p id={`todo-${index}`} key={index}>
-              {todo}
-            </p>
-          );
-        })}
-        <button id="add-todo-btn" onClick={addTodo}>
-          Add Todo
-        </button>
-      </div>
-      <hr />
-      <div>
-        Count: {count}
-        <button id="incr-cnt" onClick={increment}>
+    <div>
+      <p>
+        Count: <span id="incr-cnt">{count}</span>{" "}
+        <button id="incr-btn" onClick={() => setCount((prev) => prev + 1)}>
           +
         </button>
-        <h2>Expensive Calculation</h2>
-        {calculation}
-      </div>
+      </p>
+
+      <h1>Expensive Calculation</h1>
+      <p id="calc">{expensiveCalculation}</p>
     </div>
   );
-};
-
-const expensiveCalculation = (num) => {
-  console.log("Calculating...");
-  for (let i = 0; i < 1000000000; i++) {
-    num += 1;
-  }
-  return num;
-};
+}
 
 export default UseMemo;

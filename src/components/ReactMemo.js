@@ -1,48 +1,45 @@
-import React, { useState, memo } from "react";
+import React, { useEffect, useState } from "react";
 
-const SkillItem = memo(({ skill }) => {
-  console.log("Rendering skill:", skill);
-  return <li id="item-jumbotron">{skill}</li>;
-});
+const ReactMemo = React.memo(() => {
+  console.log("ReactMemo rendered");
+  const [tasks, setTasks] = useState([]);
+  const [task, setTask] = useState("");
 
-const ReactMemo = () => {
-  const [input, setInput] = useState("");
-  const [skills, setSkills] = useState([]);
-
-  const handleInputValue = (event) => {
-    setInput(event.target.value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setTasks((prev) => [...prev, task]);
+    setTask("");
   };
-
-  const handleAddSkill = () => {
-    if (input.trim() !== "") {
-      setSkills((prevSkills) => [...prevSkills, input]);
-      setInput("");
-    }
-  };
-
-  //JSX
 
   return (
-    <div id="main">
-      <hr />
-      <hr />
+    <div>
       <h1>React.memo</h1>
-      <input
-        id="skill-input"
-        type="text"
-        value={input}
-        onChange={handleInputValue}
-      />
-      <button id="skill-btn" onClick={handleAddSkill}>
-        Add Skill
-      </button>
+      <form onSubmit={handleSubmit}>
+        <input
+          id="skill-input"
+          type="text"
+          value={task}
+          onChange={(e) => setTask(e.target.value)}
+          required
+          minLength="5"
+        />
+        <button
+          id="skill-btn"
+          type="submit"
+          // onClick={() => setTasks((prev) => [...prev, task])}
+        >
+          Add Skill
+        </button>
+      </form>
       <ul>
-        {skills.map((skill, index) => (
-          <SkillItem key={index} skill={skill} />
+        {tasks.map((task, index) => (
+          <li key={index} id={`item-${task}`}>
+            {task}
+          </li>
         ))}
       </ul>
     </div>
   );
-};
+});
 
 export default ReactMemo;
