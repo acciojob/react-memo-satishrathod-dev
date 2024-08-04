@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 
 const UseMemo = () => {
-  const [count, setCount] = useState("+");
+  const [count, setCount] = useState(0);
   const [todos, setTodos] = useState([]);
   const calculation = useMemo(
     () => expensiveCalculation(parseInt(count, 10)),
@@ -9,8 +9,8 @@ const UseMemo = () => {
   );
 
   const increment = () => {
-    setCount((c) => (c === "+" ? 1 : parseInt(c, 10) + 1));
-    // setCount((c) => c + 1);
+    // setCount((c) => (c === "+" ? 1 : parseInt(c, 10) + 1));
+    setCount((c) => c + 1);
   };
 
   const addTodo = () => {
@@ -37,7 +37,7 @@ const UseMemo = () => {
       <div>
         Count: {count}
         <button id="incr-cnt" onClick={increment}>
-          {count}
+          +
         </button>
         <h2>Expensive Calculation</h2>
         {calculation}
